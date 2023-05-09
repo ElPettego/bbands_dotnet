@@ -1,0 +1,172 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "Cryptowatcher.TA-LIb-Core/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.6/TA-Lib-Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/TA-Lib-Core.dll": {}
+        }
+      },
+      "TechnicalAnalysis.Net/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Cryptowatcher.TA-LIb-Core": "1.0.0",
+          "TechnicalAnalysis.Net.Contracts": "2.0.0",
+          "TechnicalAnalysis.Net.Util": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/TANet.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/TANet.Core.dll": {}
+        }
+      },
+      "TechnicalAnalysis.Net.Contracts/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/TANet.Contracts.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/TANet.Contracts.dll": {}
+        }
+      },
+      "TechnicalAnalysis.Net.Util/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Cryptowatcher.TA-LIb-Core": "1.0.0",
+          "TechnicalAnalysis.Net.Contracts": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/TANet.Util.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/TANet.Util.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Cryptowatcher.TA-LIb-Core/1.0.0": {
+      "sha512": "lg8vMFnTxY83hQnWL9jYs4Sap3924x3v6BWW6BPpAgFQoEvJk1aicVpJrp3/ibudKxOrwzqMUR3uxdkgQ5RBew==",
+      "type": "package",
+      "path": "cryptowatcher.ta-lib-core/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cryptowatcher.ta-lib-core.1.0.0.nupkg.sha512",
+        "cryptowatcher.ta-lib-core.nuspec",
+        "lib/netstandard1.6/TA-Lib-Core.dll"
+      ]
+    },
+    "TechnicalAnalysis.Net/2.0.0": {
+      "sha512": "Q50YcdLOmGswSPJzNSiJ+f9XyPRhfMvXrAK2qTK6sxfuxCKLVDPRp71XUu6CX1vd3mU6iaeXOAqHtul4JnpAiQ==",
+      "type": "package",
+      "path": "technicalanalysis.net/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/netstandard2.0/TANet.Core.dll",
+        "technicalanalysis.net.2.0.0.nupkg.sha512",
+        "technicalanalysis.net.nuspec"
+      ]
+    },
+    "TechnicalAnalysis.Net.Contracts/2.0.0": {
+      "sha512": "5JpR5tzPiLQyqTX07tmQoEKvGnDugdqxUqLkYnnZNYPibtBnt3aEjm7uzc4saHPxQd2HIjhLjOUVQpNOrI5TlA==",
+      "type": "package",
+      "path": "technicalanalysis.net.contracts/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/netstandard2.0/TANet.Contracts.dll",
+        "technicalanalysis.net.contracts.2.0.0.nupkg.sha512",
+        "technicalanalysis.net.contracts.nuspec"
+      ]
+    },
+    "TechnicalAnalysis.Net.Util/2.0.0": {
+      "sha512": "z/PdRyH0Sna81t9FYqh5StTxzLS6UwNDQyxPvmRC8HMOdQPUiLQlQQKPas6Otg5fFqV4zM342/Z3n3dznnxY0A==",
+      "type": "package",
+      "path": "technicalanalysis.net.util/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/netstandard2.0/TANet.Util.dll",
+        "technicalanalysis.net.util.2.0.0.nupkg.sha512",
+        "technicalanalysis.net.util.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "TechnicalAnalysis.Net >= 2.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Mattia\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Mattia\\Desktop\\dev\\bbands_dotnet\\bbands_dotnet.csproj",
+      "projectName": "bbands_dotnet",
+      "projectPath": "C:\\Users\\Mattia\\Desktop\\dev\\bbands_dotnet\\bbands_dotnet.csproj",
+      "packagesPath": "C:\\Users\\Mattia\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mattia\\Desktop\\dev\\bbands_dotnet\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Mattia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "dependencies": {
+          "TechnicalAnalysis.Net": {
+            "target": "Package",
+            "version": "[2.0.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

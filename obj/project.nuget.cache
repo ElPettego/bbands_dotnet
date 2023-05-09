@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "mxMG/aFN+0YcfYzaljASTjlFD/i7G2smuodvFuQokyVryIC6T3JTvh2mlXzDna2tiaHom8BtFFheCmgzTvbLBA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mattia\\Desktop\\dev\\bbands_dotnet\\bbands_dotnet.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mattia\\.nuget\\packages\\cryptowatcher.ta-lib-core\\1.0.0\\cryptowatcher.ta-lib-core.1.0.0.nupkg.sha512",
+    "C:\\Users\\Mattia\\.nuget\\packages\\technicalanalysis.net\\2.0.0\\technicalanalysis.net.2.0.0.nupkg.sha512",
+    "C:\\Users\\Mattia\\.nuget\\packages\\technicalanalysis.net.contracts\\2.0.0\\technicalanalysis.net.contracts.2.0.0.nupkg.sha512",
+    "C:\\Users\\Mattia\\.nuget\\packages\\technicalanalysis.net.util\\2.0.0\\technicalanalysis.net.util.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

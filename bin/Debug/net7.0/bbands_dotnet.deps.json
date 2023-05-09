@@ -1,0 +1,95 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "bbands_dotnet/1.0.0": {
+        "dependencies": {
+          "TechnicalAnalysis.Net": "2.0.0"
+        },
+        "runtime": {
+          "bbands_dotnet.dll": {}
+        }
+      },
+      "Cryptowatcher.TA-LIb-Core/1.0.0": {
+        "runtime": {
+          "lib/netstandard1.6/TA-Lib-Core.dll": {
+            "assemblyVersion": "1.0.6380.29818",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "TechnicalAnalysis.Net/2.0.0": {
+        "dependencies": {
+          "Cryptowatcher.TA-LIb-Core": "1.0.0",
+          "TechnicalAnalysis.Net.Contracts": "2.0.0",
+          "TechnicalAnalysis.Net.Util": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/TANet.Core.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "TechnicalAnalysis.Net.Contracts/2.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/TANet.Contracts.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "TechnicalAnalysis.Net.Util/2.0.0": {
+        "dependencies": {
+          "Cryptowatcher.TA-LIb-Core": "1.0.0",
+          "TechnicalAnalysis.Net.Contracts": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/TANet.Util.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "bbands_dotnet/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cryptowatcher.TA-LIb-Core/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lg8vMFnTxY83hQnWL9jYs4Sap3924x3v6BWW6BPpAgFQoEvJk1aicVpJrp3/ibudKxOrwzqMUR3uxdkgQ5RBew==",
+      "path": "cryptowatcher.ta-lib-core/1.0.0",
+      "hashPath": "cryptowatcher.ta-lib-core.1.0.0.nupkg.sha512"
+    },
+    "TechnicalAnalysis.Net/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Q50YcdLOmGswSPJzNSiJ+f9XyPRhfMvXrAK2qTK6sxfuxCKLVDPRp71XUu6CX1vd3mU6iaeXOAqHtul4JnpAiQ==",
+      "path": "technicalanalysis.net/2.0.0",
+      "hashPath": "technicalanalysis.net.2.0.0.nupkg.sha512"
+    },
+    "TechnicalAnalysis.Net.Contracts/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5JpR5tzPiLQyqTX07tmQoEKvGnDugdqxUqLkYnnZNYPibtBnt3aEjm7uzc4saHPxQd2HIjhLjOUVQpNOrI5TlA==",
+      "path": "technicalanalysis.net.contracts/2.0.0",
+      "hashPath": "technicalanalysis.net.contracts.2.0.0.nupkg.sha512"
+    },
+    "TechnicalAnalysis.Net.Util/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-z/PdRyH0Sna81t9FYqh5StTxzLS6UwNDQyxPvmRC8HMOdQPUiLQlQQKPas6Otg5fFqV4zM342/Z3n3dznnxY0A==",
+      "path": "technicalanalysis.net.util/2.0.0",
+      "hashPath": "technicalanalysis.net.util.2.0.0.nupkg.sha512"
+    }
+  }
+}
