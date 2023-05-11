@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using System.Net.WebSockets;
-using System.Threading;
 using System.Text;
 using TANet.Core;
 
@@ -9,8 +8,10 @@ internal class Program
     private static string TF = "15m";
     private static string LiveDataPath = @$"./data/btc_live_data_{TF}.csv";
     private static Uri WSSURI = new Uri($"wss://stream.binance.com:9443/ws/btcusdt@kline_{TF}");
+    private static TelegramApi tgapi = new TelegramApi("-1001642976010", "5843509254:AAFYSy1dX5GvQEzrm5PGv7aaNDCxUfa5p8k");
     private static Logger logger = new Logger("DEBUG");
     private static Requests r = new Requests("https://www.binance.com");
+    private static Agent agent = new Agent();
     private static async global::System.Threading.Tasks.Task get_candles()
     {
         logger.log_mex("INFO", "Getting last 100 candles");
@@ -61,6 +62,7 @@ internal class Program
         logger.log_mex("DEBUG", _deb);
         logger.log_mex("DEBUG", lines[lines.Count - 1]);
 
+        // return a bool for new candle?
         if (lines[lines.Count - 1].Contains(tstamp)){
             lines[lines.Count - 1] = _deb;
         }
@@ -89,12 +91,10 @@ internal class Program
                 handle_mex(msg);
                 
             }
-        }
-
-
+        }      
         
-
-        
-        // var bbands = Indicators.BollingerBands();
+        var bbands = Indicators.BollingerBands();
+        var ema    = Indicators.Ema();
+        var rsi    = Indicators.Rsi();
     }
 }

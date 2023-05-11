@@ -18,3 +18,8 @@ C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\TANet.Core.dll
 C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\TANet.Contracts.dll
 C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\TANet.Util.dll
 C:\Users\Mattia\Desktop\dev\bbands_dotnet\obj\Debug\net7.0\bbands_dotnet.csproj.CopyComplete
+C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\DotNetEnv.dll
+C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Mattia\Desktop\dev\bbands_dotnet\bin\Debug\net7.0\Sprache.dll

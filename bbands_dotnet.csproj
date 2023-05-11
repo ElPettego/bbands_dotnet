@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="2.5.0" />
     <PackageReference Include="TechnicalAnalysis.Net" Version="2.0.0" />
   </ItemGroup>
 

@@ -11,4 +11,12 @@ public class Requests {
         return response;
 
     }
+
+    public async Task<string> post_request(string url, Dictionary<string, string> content){
+        var _content = new FormUrlEncodedContent(content);
+        var response = await this.client.PostAsync(url, _content);
+        var _str_res = await response.Content.ReadAsStringAsync();
+        return _str_res;
+
+    }
 }
