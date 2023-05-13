@@ -1,15 +1,19 @@
 ﻿using System.Text.Json;
 using System.Net.WebSockets;
 using System.Text;
-using TANet.Core;
+using System.Diagnostics;
+using DotNetEnv;
 
 internal class Program
 {
+    private static int LB = 10;
+    private static string? PythonPath;
     private static string TF = "15m";
     private static string LiveDataPath = @$"./data/btc_live_data_{TF}.csv";
+    private static string LiveDataPathInds = @$"./data/btc_live_data_{TF}_inds.csv";
     private static Uri WSSURI = new Uri($"wss://stream.binance.com:9443/ws/btcusdt@kline_{TF}");
     private static TelegramApi tgapi = new TelegramApi("-1001642976010", "5843509254:AAFYSy1dX5GvQEzrm5PGv7aaNDCxUfa5p8k");
-    private static Logger logger = new Logger("DEBUG");
+    private static Logger logger = new Logger("INFO");
     private static Requests r = new Requests("https://www.binance.com");
     private static Agent agent = new Agent();
     private static async global::System.Threading.Tasks.Task get_candles()
@@ -41,7 +45,7 @@ internal class Program
         }
 
     }
-    private static void handle_mex(string mex)
+    private static bool handle_mex(string mex)
     {   
         List<string> lines = File.ReadAllLines(LiveDataPath).ToList();
 
@@ -62,6 +66,7 @@ internal class Program
         logger.log_mex("DEBUG", _deb);
         logger.log_mex("DEBUG", lines[lines.Count - 1]);
 
+        bool ret = false;
         // return a bool for new candle?
         if (lines[lines.Count - 1].Contains(tstamp)){
             lines[lines.Count - 1] = _deb;
@@ -69,13 +74,31 @@ internal class Program
         else {
             lines.RemoveAt(1);
             lines.Add(_deb);
+            ret = true;
         }
 
         File.WriteAllLines(LiveDataPath, lines);
+        return ret;
     }
     private static async global::System.Threading.Tasks.Task Main(string[] args)
     {        
         logger.log_mex("WARNING", "Starting the bot bruv");
+
+        // LOADING STUFF
+        Env.Load();
+        #pragma warning disable CS8601
+        PythonPath = Environment.GetEnvironmentVariable("PYTHON_PATH"); 
+        #pragma warning restore CS8601
+        var StartInfo = new ProcessStartInfo
+        {
+            FileName = PythonPath,
+            Arguments = "calculate_inds.py",
+            WorkingDirectory = Directory.GetCurrentDirectory(),
+            UseShellExecute = false,
+            RedirectStandardOutput = false,
+        };
+        
+        
         await get_candles();
 
         using (ClientWebSocket ws = new ClientWebSocket())
@@ -88,13 +111,82 @@ internal class Program
                 WebSocketReceiveResult res = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);                
                 var msg = Encoding.UTF8.GetString(buffer, 0, res.Count);
 
-                handle_mex(msg);
+                bool eval = handle_mex(msg);
+
+                if (eval)
+                {                    
+                    var pr = Process.Start(StartInfo);
+                    #pragma warning disable CS8602
+                    pr.WaitForExit();
+                    #pragma warning restore CS8602
+
+                    decimal[] close = CsvParser.ParseCsvColumn(LiveDataPathInds, 11, 5,  LB);
+                    decimal[] ema   = CsvParser.ParseCsvColumn(LiveDataPathInds, 11, 6,  LB);
+                    decimal[] rsi   = CsvParser.ParseCsvColumn(LiveDataPathInds, 11, 7,  LB);
+                    decimal[] bbu   = CsvParser.ParseCsvColumn(LiveDataPathInds, 11, 9,  LB);
+                    decimal[] bbl   = CsvParser.ParseCsvColumn(LiveDataPathInds, 11, 10, LB);
+
+                    var _close = close[LB-2];
+                    var _bbu   = bbu[LB-2]; 
+                    var _bbl   = bbl[LB-2]; 
+                    var _ema   = ema[LB-2]; 
+                    var _rsi   = rsi[LB-2];
+
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                    string time = DateTimeOffset.Now.ToString();
+                    Console.Write($"{time}");
+                    Console.ResetColor();
+                    Console.Write(" - ");
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Write($"INFO");
+                    Console.ResetColor();
+                    Console.Write($" - PRICE: {_close} - EMA: {_ema} - BBU: {_bbu} - BBL: {_bbl} - RSI: {_rsi}\r");
+
+                    if (agent.current_trade == null || !agent.current_trade.open_trade)
+                    {
+                        if (_bbu < _close & _rsi > 70)
+                        {
+                            agent.open_position("LONG", (float)_close, DateTimeOffset.Now);
+                            logger.log_mex("WARNING", $"OPENING TRADE -> SIDE: LONG - PRICE: {_close}");
+                        }
+                        if (_bbu > _close & _rsi < 30)
+                        {
+                            agent.open_position("SHORT", (float)_close, DateTimeOffset.Now);
+                            logger.log_mex("WARNING", $"OPENING TRADE -> SIDE: SHORT - PRICE: {_close}");
+                        }
+                        continue;
+                    }
+                    if (agent.current_trade.open_trade)
+                    {
+                        float cur_pl = _utils.calculate_result(
+                            agent.current_trade.long_short, 
+                            agent.current_trade.open_price, 
+                            (float)_close);
+
+                        if(agent.current_trade.long_short.Equals("LONG"))
+                        {
+                            if (_close < _ema)
+                            {
+                                agent.close_position((float)_close, DateTimeOffset.Now);
+                                logger.log_mex("WARNING", $"CLOSING TRADE -> SIDE: LONG - PRICE: {_close} - RESULT: {cur_pl}");
+                            }
+                        }
+                        if(agent.current_trade.long_short.Equals("SHORT"))
+                        {
+                            if (_close > _ema)
+                            {
+                                agent.close_position((float)_close, DateTimeOffset.Now);
+                                logger.log_mex("WARNING", $"CLOSING TRADE -> SIDE: SHORT - PRICE: {_close} - RESULT: {cur_pl}");
+                            }
+                        }
+                    }
+                }
+
+                
+                
+                
                 
             }
         }      
-        
-        var bbands = Indicators.BollingerBands();
-        var ema    = Indicators.Ema();
-        var rsi    = Indicators.Rsi();
     }
 }

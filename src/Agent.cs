@@ -1,6 +1,6 @@
 using DotNetEnv;
 
-public class utils 
+public class _utils 
 {
     public static float calculate_result(string long_short, float open_price, float close_price)
         {
@@ -35,7 +35,7 @@ public class Trade
         this.close_price = close_price;
         this.close_date  = close_date;
         this.open_trade  = false;
-        this.result = utils.calculate_result(this.long_short, this.open_price, close_price);
+        this.result = _utils.calculate_result(this.long_short, this.open_price, close_price);
     }
 }
 
@@ -87,10 +87,7 @@ public class Agent
         {
             trade_result = "LOSS"; emoji = "🟥";
         }
-        var mex =   @$"🚨 CLOSE POSITION 🚨\n\n📄 ASSETT => BTCUSDT\n{emoji} {trade_result}\n
-                    🕰️ OPEN DATE => {this.current_trade.open_date}\n🕰️ CLOSE DATE => {close_date}\n
-                    💰 OPEN PRICE => {this.current_trade.open_price}\n💰 CLOSE PRICE => {close_price}\n\n
-                    {emoji} RESULT => {this.current_trade.result}% 💵";
+        var mex = $"🚨 CLOSE POSITION 🚨\n\n📄 ASSETT => BTCUSDT\n{emoji} {trade_result}\n🕰️ OPEN DATE => {this.current_trade.open_date}\n🕰️ CLOSE DATE => {close_date}\n💰 OPEN PRICE => {this.current_trade.open_price}\n💰 CLOSE PRICE => {close_price}\n\n{emoji} RESULT => {this.current_trade.result}% 💵";
                  
         File.AppendAllText(TradesPath, $"{this.current_trade.ToString()}\n");
         this.telegramApi.emit(mex);
