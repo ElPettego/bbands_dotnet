@@ -35,7 +35,7 @@ public class Trade
         this.close_price = close_price;
         this.close_date  = close_date;
         this.open_trade  = false;
-        this.result = _utils.calculate_result(this.long_short, this.open_price, close_price);
+        this.result = (float) Math.Round(_utils.calculate_result(this.long_short, this.open_price, close_price), 2);
     }
 
     public override string ToString()
