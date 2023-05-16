@@ -132,18 +132,10 @@ internal class Program
                     var _ema   = ema[LB-2]; 
                     var _rsi   = rsi[LB-2];
 
-                    Console.BackgroundColor = ConsoleColor.Magenta;
-                    string time = DateTimeOffset.Now.ToString();
-                    Console.Write($"{time}");
-                    Console.ResetColor();
-                    Console.Write(" - ");
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Write($"INFO");
-                    Console.ResetColor();
-                    Console.Write($" - PRICE: {_close} - EMA: {_ema} - BBU: {_bbu} - BBL: {_bbl} - RSI: {_rsi}\r");
-
+                    
                     if (agent.current_trade == null || !agent.current_trade.open_trade)
                     {
+                        logger.log_mex_noline("INFO", $"PRICE: {_close} - EMA: {_ema} - BBU: {_bbu} - BBL: {_bbl} - RSI: {_rsi}\r");
                         if (_bbu < _close & _rsi > 70)
                         {
                             agent.open_position("LONG", (float)_close, DateTimeOffset.Now);
@@ -162,6 +154,9 @@ internal class Program
                             agent.current_trade.long_short, 
                             agent.current_trade.open_price, 
                             (float)_close);
+                        cur_pl = (float) Math.Round(cur_pl, 2);
+
+                        logger.log_mex_noline("INFO", $"CURR PROFIT: {cur_pl} - PRICE: {_close} - EMA: {_ema} - BBU: {_bbu} - BBL: {_bbl} - RSI: {_rsi}\r");
 
                         if(agent.current_trade.long_short.Equals("LONG"))
                         {
@@ -180,12 +175,7 @@ internal class Program
                             }
                         }
                     }
-                }
-
-                
-                
-                
-                
+                }    
             }
         }      
     }

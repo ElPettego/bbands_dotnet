@@ -37,6 +37,11 @@ public class Trade
         this.open_trade  = false;
         this.result = _utils.calculate_result(this.long_short, this.open_price, close_price);
     }
+
+    public override string ToString()
+    {
+        return $"{this.open_price},{this.open_date},{this.long_short},{this.result},{this.close_price},{this.close_date}";
+    }
 }
 
 public class Agent 

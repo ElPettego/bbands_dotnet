@@ -68,4 +68,21 @@ class Logger
         Console.ResetColor();
         Console.WriteLine($" - {mex}");
     }
+
+    public void log_mex_noline(string level, string mex)
+    {   
+        var _tup = switch_log_lev(level, false);
+        if (!_tup.Item1){
+            return;
+        }
+        Console.BackgroundColor = ConsoleColor.Magenta;
+        string time = DateTimeOffset.Now.ToString();
+        Console.Write($"{time}");
+        Console.ResetColor();
+        Console.Write(" - ");
+        Console.BackgroundColor = _tup.Item2;
+        Console.Write($"{level}");
+        Console.ResetColor();
+        Console.Write($" - {mex}");
+    }
 }
