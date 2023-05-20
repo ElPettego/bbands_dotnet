@@ -108,10 +108,18 @@ internal class Program
             byte[] buffer = new Byte[1024];
             while (ws.State == WebSocketState.Open)
             {
-                WebSocketReceiveResult res = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);                
-                var msg = Encoding.UTF8.GetString(buffer, 0, res.Count);
-
-                bool eval = handle_mex(msg);
+                repeat:
+                bool eval;
+                try
+                {
+                    WebSocketReceiveResult res = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);                
+                    var msg = Encoding.UTF8.GetString(buffer, 0, res.Count);
+                    eval = handle_mex(msg);
+                }
+                catch
+                {
+                    goto repeat;
+                }
 
                 if (eval)
                 {                    
@@ -131,6 +139,7 @@ internal class Program
                     var _bbl   = bbl[LB-2]; 
                     var _ema   = ema[LB-2]; 
                     var _rsi   = rsi[LB-2];
+                    
 
                     
                     if (agent.current_trade == null || !agent.current_trade.open_trade)
